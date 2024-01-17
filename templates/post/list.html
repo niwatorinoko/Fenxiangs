@@ -1,0 +1,5 @@
+{% for post in object_list %}
+    <p>{{ post.description }}</p>
+    <p>{{ post.created_at }}</p>
+    <p>{{ post.likes_count }}</p>
+{% endfor %}
