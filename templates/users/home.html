@@ -1,0 +1,14 @@
+{% extends "users/base.html" %}
+{% block title %}ホーム{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-5"></h1>
+    <p>{{ user.name }}さん、こんにちは。</p>
+    <p>{{ user.email }}</p>
+    <img src="{{ user.icon_image.url }}" alt="{{ user.name }}'s icon" />  <!-- Ensure the image URL is correct -->
+    <p>{{ user.graduate_at }}</p>
+    <p>Summer Graduate: {{ user.graduate_at_summer|yesno:"Yes,No" }}</p> <!-- For more user-friendly display of Boolean -->
+    <a href="{% url 'users:logout' %}">ログアウト</a>
+</div>
+{% endblock %}
