@@ -1,7 +1,66 @@
 
-{% for post in object_list %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Fenxiangs</title>
+        <link rel="stylesheet" href='{% static "post/list.css" %}' />
+    </head>
+
+    <header>  
+    <!-- メニューバー -->
+            <div class="header_wrapper">
+                <h1>
+                    <a href="#">Fenxiangs</a>
+                </h1>
+            </div>
+
+        <nav class="gnav">
+            <ul class="gnav_wrapper">
+                <li><a href="#">ホーム</a></li>
+                <li><a href="#">#times</a></li>
+            </ul>
+        </nav>
+        
+    <!-- ログイン＆ログアウト -->
+
+
+
+
+    <!-- fixed title -->
+        <img src="{% static 'assets/パンダ.png' %}" alt="webicon">
+
+
+
+
+
+
+
+    </header>
+
+  
+
+
+    <body>
+     
+    <!-- 投稿フィード -->
+    {% for post in object_list %}
     <p>{{ post.description }}</p>
     <p>{{ post.created_at }}</p>
     <p>{{ post.likes_count }}</p>
-{% endfor %}
+    {% endfor %}
 
+
+
+
+
+    </body>
+
+
+    <footer>
+
+
+    </footer>
+
+</html>
