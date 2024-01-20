@@ -1,5 +1,25 @@
 h1{
     text-align: center;
+    font-family: 'Zen Maru Gothic', serif;
+    border: 2px solid #000033;
+    margin-left: 41%;
+    margin-right: 41%;
+    margin-top: 100px;
+    border-left:10px solid #000033;
+    box-shadow: 0 4px 0 0 rgb(0 0 0 / 11%);
+    text-shadow: 0 4px 0 0 rgb(0 0 0 / 11%) ;
+    
+  }
+
+
+  .icon{
+    position: fixed ;top:0px;left:0px;
+    font-family: 'Agbalumo', system-ui;
+    margin-left: 30px;
+    font-size: 30px;
+    background-color: #EEEEEE;
+    border:5px solid #000033;
+
   }
   
   div.reg{
