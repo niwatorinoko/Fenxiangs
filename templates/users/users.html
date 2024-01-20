@@ -1,0 +1,8 @@
+<h1>ユーザー一覧</h1>
+{% for user in object_list %}
+    <p>{{ user.name }}</p>
+    <p>{{ user.email }}</p>
+    <img src="{{ user.icon_image.url }}" alt="{{ user.name }}'s icon" />  <!-- Ensure the image URL is correct -->
+    <p>{{ user.graduate_at }}</p>
+    <p>Summer Graduate: {{ user.graduate_at_summer|yesno:"Yes,No" }}</p> <!-- For more user-friendly display of Boolean -->
+{% endfor %}
