@@ -3,13 +3,9 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Account
 
-class LoginForm(AuthenticationForm):
-    """ログインフォーム"""
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs["class"] = "form-control"
-
+class UserLoginForm(forms.Form):
+    username = forms.CharField(label='ユーザーネーム')
+    password = forms.CharField(label='パスワード')
 
 # フォームクラス作成
 class AccountForm(forms.ModelForm):
