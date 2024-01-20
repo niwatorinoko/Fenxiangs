@@ -24,6 +24,8 @@ class AccountForm(forms.ModelForm):
         fields = ('username','email','password','password_confirmation')
         # フィールド名指定
         labels = {'username':"ユーザーID",'email':"メール"}
+    
+    prefix = 'account'
 
 class AddAccountForm(forms.ModelForm):
     class Meta():
@@ -31,3 +33,5 @@ class AddAccountForm(forms.ModelForm):
         model = Account
         fields = ('last_name','first_name','icon_image','graduate_at','graduate_at_summer')
         labels = {'last_name':"苗字",'first_name':"名前",'icon_image':"写真アップロード",'graduate_at':'卒業年','graduate_at_summer':'夏卒or冬卒'}
+
+    prefix = 'add'

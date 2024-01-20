@@ -30,52 +30,26 @@ class LogoutView(LoginRequiredMixin, LogoutView):
 
 class  AccountRegistration(TemplateView):
 
-    def __init__(self):
-        self.params = {
-        "AccountCreate":False,
-        "account_form": AccountForm(),
-        "add_account_form":AddAccountForm(),
+    def get(self, request, *args, **kwargs):
+        context = {
+            'account_form': AccountForm(),
+            'add_form': AddAccountForm(),
         }
+        return render(request, 'users/register.html', context)
+    
+    def post(self, request):
+        add_form = AddAccountForm(request.POST, request.FILES, prefix='add')
+        account_form = AccountForm(request.POST, prefix='account')
 
-    # Get処理
-    def get(self,request):
-        self.params["account_form"] = AccountForm()
-        self.params["add_account_form"] = AddAccountForm()
-        self.params["AccountCreate"] = False
-        return render(request,"users/register.html",context=self.params)
-
-    # Post処理
-    def post(self,request):
-        self.params["account_form"] = AccountForm(data=request.POST)
-        self.params["add_account_form"] = AddAccountForm(data=request.POST)
-        print(self.params["account_form"],self.params["add_account_form"])
-        # フォーム入力の有効検証
-        if self.params["account_form"].is_valid() and self.params["add_account_form"].is_valid():
-            # アカウント情報をDB保存
-            account = self.params["account_form"].save()
-            # パスワードをハッシュ化
-            account.set_password(account.password)
-            # ハッシュ化パスワード更新
-            account.save()
-
-            # 下記追加情報
-            # 下記操作のため、コミットなし
-            add_account = self.params["add_account_form"].save(commit=False)
-            # AccountForm & AddAccountForm 1vs1 紐付け
-            add_account.user = account
-
-            # 画像アップロード有無検証
-            if 'icon_image' in request.FILES:
-                add_account.account_image = request.FILES['icon_image']
-
-            # モデル保存
-            add_account.save()
-
-            # アカウント作成情報更新
-            self.params["AccountCreate"] = True
-
+        if account_form.is_valid() and add_form.is_valid():
+            new_account = account_form.save()
+            new_add = add_form.save(commit=False)
+            new_add.user = new_account
+            new_add.save()
+            return render(request, 'users/home.html')
         else:
-            # フォームが有効でない場合
-            print(self.params["account_form"].errors)
-
-        return render(request,"users/register.html",context=self.params)
+            context = {
+                'account_form': account_form,
+                'add_form': add_form,
+            }
+            return render(request, 'users/register.html', context)
